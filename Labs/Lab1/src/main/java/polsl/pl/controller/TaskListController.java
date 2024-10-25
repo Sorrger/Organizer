@@ -2,25 +2,55 @@ package polsl.pl.controller;
 
 import polsl.pl.model.OutOfRangePriority;
 import polsl.pl.model.Task;
-import polsl.pl.model.TaskManager;
+import polsl.pl.model.TaskListManager;
 import polsl.pl.view.TaskListView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Representing Task List Controller
+ * @author Dawid Polczyk
+ * @version 1.0
+ */
 public class TaskListController {
 
-    private TaskManager taskManager;
+    /**
+     * Representing a Task List Manager
+     */
+    private TaskListManager taskListManager;
+    /**
+     * Representing a Task List View
+     */
     private TaskListView taskListView;
+    /**
+     * Scanner used for User - TaskList communication
+     */
     private Scanner sc;
+    /**
+     * value if the TaskListLoop should end
+     */
     private boolean end = false;
 
-    public TaskListController(TaskManager taskManager, TaskListView taskListView) {
-        this.taskManager = taskManager;
+    /** Creates a TaskListController object
+     * @param taskListManager Representing Task List Manager
+     * @param taskListView Representing Task List View
+     */
+    public TaskListController(TaskListManager taskListManager, TaskListView taskListView) {
+        this.taskListManager = taskListManager;
         this.taskListView = taskListView;
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Loop for Task List app
+     * User type on keyboard choices of the menu
+     * 1 - Display Task
+     * 2 - Delete Task
+     * 3 - Add Task
+     * 4 - Set Task isDone value
+     * 5 - end loop(set end boolean value to false)
+     */
     public void TaskListLoop() {
         while (!end) {
             taskListView.menu();
@@ -28,18 +58,16 @@ public class TaskListController {
                 int i = sc.nextInt();
                 switch (i) {
                     case 1: {
-                        // display tasks
-                        taskListView.displayTaskList(taskManager.getTaskList());
+                        taskListView.displayTaskList(taskListManager.getTaskList());
                         break;
                     }
                     case 2: {
-                        // delete tasks
                         deleteTask();
                         break;
                     }
                     case 3: {
                         // add new task
-                        taskManager.addTask(getTask());
+                        taskListManager.addTask(getTask());
                         break;
                     }
                     case 4: {
@@ -60,9 +88,17 @@ public class TaskListController {
                 sc.nextLine();
             }
         }
-        System.out.println("Koniec programu");
+        System.out.println("Program Exit");
     }
 
+    /**Gets Task that user want to create
+     * User is asked to provide data:
+     * 1 - Task name
+     * 2 - Task description
+     * 3 - Task priority - with int between and including 1 and 3
+     * Data is provided by keyboard in console
+     * @return Task representation of task that user created
+     */
     public Task getTask() {
         Task newTask = new Task();
         System.out.print("New Task [" + newTask.getId() + "]");
@@ -71,7 +107,6 @@ public class TaskListController {
         System.out.print("Enter Task Description: ");
         newTask.setDescription(sc.next());
 
-        // Task Priority Enter
         while (true) {
             try {
                 System.out.print("Enter Task Priority 1-3: ");
@@ -91,17 +126,21 @@ public class TaskListController {
         return newTask;
     }
 
-    // Delete task
+    /**
+     * Delete the Task from TaskLIst that user want to delete by his number in TaskList
+     * User is asked to provide data of the task number
+     * data is provided by the keyboard in console
+     */
     private void deleteTask() {
         System.out.print("Delete Task\n");
         while (true) {
             try {
-                System.out.print("Enter Task ID: ");
+                System.out.print("Enter Task number: ");
                 int idToRemove = sc.nextInt();
-                taskManager.removeTask(idToRemove);
+                taskListManager.removeTask(idToRemove);
                 break;
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Invalid task id.");
+                System.out.println("Invalid task number.");
             } catch (InputMismatchException e) {
                 System.out.println("Invalid value that's not a number.");
                 sc.nextLine();
@@ -109,12 +148,17 @@ public class TaskListController {
         }
     }
 
-    // Set if tank is done
+    /**Sets Task isDone value that user want
+     * User is asked to provide data:
+     * 1 - Task number in TaskList
+     * 2 - boolean value of isDone true / false
+     * Data is provided by keyboard in console
+     */
     private void setTaskDone() {
         int idIsDone;
         while (true) {
             try {
-                System.out.print("Enter Task ID: ");
+                System.out.print("Enter Task number in Task List: ");
                 idIsDone = sc.nextInt();
                 break;
             } catch (InputMismatchException e) {
@@ -142,8 +186,6 @@ public class TaskListController {
                 sc.nextLine();
             }
         }
-
-
-        taskManager.setTaskIsDone(idIsDone, isDone);
+        taskListManager.setTaskIsDone(idIsDone, isDone);
     }
 }
