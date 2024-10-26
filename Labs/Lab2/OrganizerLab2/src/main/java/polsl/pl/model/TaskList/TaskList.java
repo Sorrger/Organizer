@@ -2,11 +2,11 @@ package polsl.pl.model.TaskList;
 
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     
     private ArrayList<Task> taskList;
 
-    public TaskManager() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
     public ArrayList<Task> getTaskList() {

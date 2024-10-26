@@ -9,17 +9,17 @@ import polsl.pl.view.TaskListView;
 
 public class Main {
     public static void main(String[] args) {
+        
         TaskListView view = new TaskListView();
         TaskListManager model = new TaskListManager();
+        TaskListController controller = new TaskListController(model, view);
 
         //Example data for test
         model.addTask(new Task("Task", "opis 1", Priority.LOW, false));
         model.addTask(new Task("Task", "opis 2", Priority.MEDIUM, false));
         model.addTask(new Task("Task", "opis 3", Priority.HIGH, false));
 
-
-        TaskListController controller = new TaskListController(model, view);
-
+        //Menu loop
         controller.TaskListLoop();
     }
 }
