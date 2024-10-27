@@ -19,7 +19,7 @@ public class Task {
     /**
      * Represents task's priority
      */
-    private Priority priority;
+    private Priority priority = Priority.LOW;
     /**
      * Representing Task's done value
      */
