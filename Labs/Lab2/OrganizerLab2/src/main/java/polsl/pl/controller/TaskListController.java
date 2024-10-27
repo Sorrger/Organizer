@@ -21,9 +21,14 @@ public class TaskListController {
 
 
         //przykladowe dane bo nie ma bazy dannych
-        taskList.addTask(new Task("Task", "opis 1", Priority.LOW, false));
-        taskList.addTask(new Task("Task", "opis 2", Priority.MEDIUM, false));
-        taskList.addTask(new Task("Task", "opis 3", Priority.HIGH, false));
+        Task t1 = new Task("Task", "opis 1", Priority.LOW, false);
+        Task t2 = new Task("Task", "opis 2", Priority.MEDIUM, false);
+        Task t3 = new Task("Task", "opis 3", Priority.HIGH, false);
+        t2.setId(1);
+        t3.setId(2);
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
 
         DefaultListModel<Task> taskListModel = taskListView.getTaskListModel();
         for (Task task : taskList.getTaskList()) {
@@ -32,6 +37,7 @@ public class TaskListController {
 
         taskListView.getTaskEditButtons().b1.addActionListener(e -> {
             Task task = new Task();
+            task.setId(taskList.getTaskList().size());
             TaskFrame taskFrame = new TaskFrame(task, "Add");
 
             if (taskFrame.isTaskConfirmed()) {

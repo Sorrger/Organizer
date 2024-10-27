@@ -6,10 +6,22 @@ import javax.swing.*;
 
 public class PriorityPanelChoice extends javax.swing.JPanel {
     private JRadioButton low, medium, high;
+    private ButtonGroup buttonGroup;
     public PriorityPanelChoice(Priority priority) {
-        this.add(low = new JRadioButton("Low"));
-        this.add(medium = new JRadioButton("Medium"));
-        this.add(high = new JRadioButton("High"));
+
+        low = new JRadioButton("Low");
+        medium = new JRadioButton("Medium");
+        high = new JRadioButton("High");
+
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(low);
+        buttonGroup.add(medium);
+        buttonGroup.add(high);
+
+        this.add(low);
+        this.add(medium);
+        this.add(high);
+
         switch (priority) {
             case LOW -> low.setSelected(true);
             case MEDIUM -> medium.setSelected(true);

@@ -19,17 +19,19 @@ public class TaskFrame extends JDialog {
     public TaskFrame(Task task, String title) {
         setModal(true);
         setTitle(title + " Task");
-        setLayout(new GridLayout(6, 1));
+        setLayout(new GridLayout(6, 2));
 
-        // Initialize UI components
-        id = new JTextField(task.getId());
+
+        id = new JTextField(String.valueOf(task.getId()));
         name = new JTextArea(task.getName());
         description = new JTextArea(task.getDescription());
         priorityPanelChoice = new PriorityPanelChoice(task.getPriority());
         isDonePanelChoice = new IsDonePanelChoice(task.getIsDone());
         submitButton = new JButton(title);
 
-        // Add components to the dialog
+        id.setEditable(false);
+        id.setFocusable(false);
+
         add(id);
         add(name);
         add(description);
@@ -37,20 +39,17 @@ public class TaskFrame extends JDialog {
         add(isDonePanelChoice);
         add(submitButton);
 
-        // Set dialog size and make it visible
+
         setSize(500, 300);
         setLocationRelativeTo(null);
         submitButton.addActionListener(e -> {
-            // Confirm the task and close the dialog
             taskConfirmed = true;
             dispose();
         });
 
-        // Display the dialog
         setVisible(true);
     }
 
-    // Getters
     public boolean isTaskConfirmed() {
         return taskConfirmed;
     }
