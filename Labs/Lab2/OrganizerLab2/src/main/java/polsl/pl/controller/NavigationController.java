@@ -8,7 +8,7 @@ import polsl.pl.view.TaskListView;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewNavigation {
+public class NavigationController {
 
     private BaseView baseView;
     private CardLayout cardLayout;
@@ -16,7 +16,7 @@ public class ViewNavigation {
     private TaskListView taskListView;
     private MenuView menuView;
 
-    public ViewNavigation() {
+    public NavigationController() {
         baseView = new BaseView();
         cardLayout = new CardLayout();
         baseView.setLayout(cardLayout);

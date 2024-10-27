@@ -2,7 +2,7 @@ package polsl.pl.view;
 
 import polsl.pl.controller.AppController;
 import polsl.pl.controller.TaskListController;
-import polsl.pl.controller.ViewNavigation;
+import polsl.pl.controller.NavigationController;
 import polsl.pl.view.Controls.ButtonPanel;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.awt.*;
 public class AppView extends JFrame {
 
     private TaskListController taskListController;
-    private ViewNavigation viewNavigation;
+    private NavigationController navigationController;
     private ButtonPanel buttonPanel;
 
     public AppView() {
@@ -19,19 +19,21 @@ public class AppView extends JFrame {
         this.setTitle("Organizer");
         this.setSize(800, 600);
         this.setLayout(new BorderLayout());
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
 
-        viewNavigation = new ViewNavigation();
-        buttonPanel = new ButtonPanel("Task List","Task List", "Inne 1", "Inne 2");
+        navigationController = new NavigationController();
+        buttonPanel = new ButtonPanel("Menu","Task List", "Inne 1", "Inne 2");
 
-        add(viewNavigation.getMainPanel(), BorderLayout.CENTER);
+        add(navigationController.getMainPanel(), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-        viewNavigation.showView("menuView");
+        navigationController.showView("menuView");
 
         AppController appController = new AppController(this);
-        taskListController = new TaskListController(viewNavigation.getTaskListView());
+        taskListController = new TaskListController(navigationController.getTaskListView());
     }
-    public ViewNavigation getViewNavigation() {
-        return viewNavigation;
+    public NavigationController getViewNavigation() {
+        return navigationController;
     }
 
     public ButtonPanel getButtonPanel() {

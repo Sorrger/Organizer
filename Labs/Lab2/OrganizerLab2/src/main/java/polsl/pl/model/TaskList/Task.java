@@ -6,7 +6,7 @@ public class Task {
     private final int id;
     private String name;
     private String description;
-    private Priority priority;
+    private Priority priority = Priority.LOW;
     private boolean isDone;
 
     public Task() {
@@ -41,6 +41,9 @@ public class Task {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setDescription(String description) {

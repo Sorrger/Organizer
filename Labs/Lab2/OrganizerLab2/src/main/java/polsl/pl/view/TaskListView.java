@@ -33,4 +33,8 @@ public class TaskListView extends BaseView {
     public JList<Task> getTaskJList() {
         return taskJList;
     }
+
+    public ButtonPanel getTaskEditButtons() {
+        return taskEditButtons;
+    }
 }
