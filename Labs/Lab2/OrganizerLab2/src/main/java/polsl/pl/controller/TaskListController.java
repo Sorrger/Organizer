@@ -32,21 +32,38 @@ public class TaskListController {
 
         taskListView.getTaskEditButtons().b1.addActionListener(e -> {
             Task task = new Task();
-            TaskFrame taskFrame = new TaskFrame(task,"Add");
+            TaskFrame taskFrame = new TaskFrame(task, "Add");
+
             if (taskFrame.isTaskConfirmed()) {
+                task.setName(taskFrame.getTaskName());
+                task.setDescription(taskFrame.getTaskDescription());
+                task.setPriority(taskFrame.getTaskPriority());
+                task.setDone(taskFrame.isTaskDone());
+
                 taskList.addTask(task);
                 taskListView.getTaskListModel().addElement(task);
             }
         });
+
         taskListView.getTaskEditButtons().b2.addActionListener(e -> {
             int selectedIndex = taskListView.getTaskJList().getSelectedIndex();
-            Task selectedTask = taskList.getTaskList().get(selectedIndex);
+            if (selectedIndex != -1) {
+                Task selectedTask = taskList.getTaskList().get(selectedIndex);
+                TaskFrame taskEditFrame = new TaskFrame(selectedTask, "Edit");
 
-            TaskFrame taskEditFrame = new TaskFrame(selectedTask,"Edit");
-            if (taskEditFrame.isTaskConfirmed()) {
-                taskListModel.set(selectedIndex, selectedTask);
+                if (taskEditFrame.isTaskConfirmed()) {
+                    selectedTask.setName(taskEditFrame.getTaskName());
+                    selectedTask.setDescription(taskEditFrame.getTaskDescription());
+                    selectedTask.setPriority(taskEditFrame.getTaskPriority());
+                    selectedTask.setDone(taskEditFrame.isTaskDone());
+
+                    taskListView.getTaskListModel().set(selectedIndex, selectedTask);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No task selected for editing.");
             }
         });
+
         taskListView.getTaskEditButtons().b3.addActionListener(e -> {
             if(taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).getIsDone())
                 taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).setDone(false);

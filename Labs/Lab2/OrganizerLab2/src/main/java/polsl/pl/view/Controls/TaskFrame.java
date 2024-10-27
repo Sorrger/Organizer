@@ -1,5 +1,6 @@
 package polsl.pl.view.Controls;
 
+import polsl.pl.model.TaskList.Priority;
 import polsl.pl.model.TaskList.Task;
 
 import javax.swing.*;
@@ -10,50 +11,67 @@ public class TaskFrame extends JDialog {
     private JTextArea name;
     private JTextArea description;
     private PriorityPanelChoice priorityPanelChoice;
-    private IsDonePanelChoice isDonePanelChoiceone;
-    private JButton editButton;
+    private IsDonePanelChoice isDonePanelChoice;
+    private JButton submitButton;
 
     private boolean taskConfirmed = false;
 
     public TaskFrame(Task task, String title) {
-        this.setModal(true);
+        setModal(true);
+        setTitle(title + " Task");
+        setLayout(new GridLayout(6, 1));
 
-        this.setTitle(title + " Task");
-        this.setLayout(new GridLayout(6, 1));
+        // Initialize UI components
+        id = new JTextField(task.getId());
+        name = new JTextArea(task.getName());
+        description = new JTextArea(task.getDescription());
+        priorityPanelChoice = new PriorityPanelChoice(task.getPriority());
+        isDonePanelChoice = new IsDonePanelChoice(task.getIsDone());
+        submitButton = new JButton(title);
 
-        this.id = new JTextField(task.getId());
-        this.name = new JTextArea(task.getName());
-        this.description = new JTextArea(task.getDescription());
-        this.priorityPanelChoice = new PriorityPanelChoice(task.getPriority());
-        this.isDonePanelChoiceone = new IsDonePanelChoice(task.getIsDone());
-        this.editButton = new JButton(title);
-
-        this.add(id);
-        this.add(name);
-        this.add(description);
-        this.add(priorityPanelChoice);
-        this.add(isDonePanelChoiceone);
-        this.add(editButton);
-
-        // Action listener to save changes and close the dialog
-        this.editButton.addActionListener(e -> {
-            task.setName(name.getText());
-            task.setDescription(description.getText());
-            task.setPriority(priorityPanelChoice.getPriority());
-            task.setDone(isDonePanelChoiceone.isDone());
-
-            taskConfirmed = true;
-            this.dispose();
-        });
+        // Add components to the dialog
+        add(id);
+        add(name);
+        add(description);
+        add(priorityPanelChoice);
+        add(isDonePanelChoice);
+        add(submitButton);
 
         // Set dialog size and make it visible
-        this.setSize(500, 300);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        setSize(500, 300);
+        setLocationRelativeTo(null);
+        submitButton.addActionListener(e -> {
+            // Confirm the task and close the dialog
+            taskConfirmed = true;
+            dispose();
+        });
+
+        // Display the dialog
+        setVisible(true);
     }
 
-    // Getter to check if task was confirmed
+    // Getters
     public boolean isTaskConfirmed() {
         return taskConfirmed;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public String getTaskName() {
+        return name.getText();
+    }
+
+    public String getTaskDescription() {
+        return description.getText();
+    }
+
+    public Priority getTaskPriority() {
+        return priorityPanelChoice.getPriority();
+    }
+
+    public boolean isTaskDone() {
+        return isDonePanelChoice.isDone();
     }
 }

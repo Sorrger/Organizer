@@ -51,7 +51,7 @@ public class Task {
     }
     @Override
     public String toString() {
-        return "Task"+"[" + id + "]" +"{\n" +  name + "description = " + description +
+        return "Task"+"[" + id + "]" +"{ Name= " +  name + " description = " + description +
                 " priority = " + priority + ", isDone = " + isDone + " }";
     }
  
