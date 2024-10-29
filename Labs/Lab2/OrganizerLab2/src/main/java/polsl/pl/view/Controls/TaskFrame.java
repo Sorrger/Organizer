@@ -19,8 +19,7 @@ public class TaskFrame extends JDialog {
     public TaskFrame(Task task, String title) {
         setModal(true);
         setTitle(title + " Task");
-        setLayout(new GridLayout(6, 2));
-
+        setLayout(new GridLayout(6, 2, 10, 10));
 
         id = new JTextField(String.valueOf(task.getId()));
         name = new JTextArea(task.getName());
@@ -32,13 +31,19 @@ public class TaskFrame extends JDialog {
         id.setEditable(false);
         id.setFocusable(false);
 
+        add(new JLabel("ID:"));
         add(id);
+        add(new JLabel("Name:"));
         add(name);
+        add(new JLabel("Description:"));
         add(description);
+        add(new JLabel("Priority:"));
         add(priorityPanelChoice);
+        add(new JLabel("Is Done:"));
         add(isDonePanelChoice);
-        add(submitButton);
 
+        add(new JLabel());
+        add(submitButton);
 
         setSize(500, 300);
         setLocationRelativeTo(null);
