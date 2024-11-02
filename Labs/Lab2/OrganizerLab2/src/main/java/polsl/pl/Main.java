@@ -29,11 +29,11 @@ public class Main {
         JTextField field2 = new JTextField();
 
         Object[] message = {
-                "Pierwszy parametr:", field1,
-                "Drugi parametr:", field2
+                "first param:", field1,
+                "second param:", field2
         };
 
-        int option = JOptionPane.showConfirmDialog(null, message, "Wprowadź parametry", JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, message, "Enter Tittle", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             String param1 = field1.getText();
             String param2 = field2.getText();
