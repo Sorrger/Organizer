@@ -1,5 +1,6 @@
 package polsl.pl.controller;
 
+import polsl.pl.model.Exceptions.EmptyValueException;
 import polsl.pl.model.TaskList.Priority;
 import polsl.pl.model.TaskList.Task;
 import polsl.pl.model.TaskList.TaskList;
@@ -38,18 +39,42 @@ public class TaskListController {
         taskListView.getTaskEditButtons().b1.addActionListener(e -> {
             Task task = new Task();
             task.setId(taskList.getTaskList().size());
-            TaskFrame taskFrame = new TaskFrame(task, "Add");
+            TaskFrame taskAddFrame = new TaskFrame(task, "Add");
 
-            if (taskFrame.isTaskConfirmed()) {
-                task.setName(taskFrame.getTaskName());
-                task.setDescription(taskFrame.getTaskDescription());
-                task.setPriority(taskFrame.getTaskPriority());
-                task.setDone(taskFrame.isTaskDone());
+            taskAddFrame.getSubmitButton().addActionListener(a -> {
+                boolean isValid = true;
 
-                taskList.addTask(task);
-                taskListView.getTaskListModel().addElement(task);
-            }
+                try {
+                    task.setName(taskAddFrame.getTaskName());
+                } catch (EmptyValueException e1) {
+                    isValid = false;
+                    JOptionPane.showMessageDialog(taskAddFrame, "Task name cannot be empty.");
+                }
+
+                try {
+                    task.setDescription(taskAddFrame.getTaskDescription());
+                } catch (EmptyValueException e1) {
+                    isValid = false;
+                    JOptionPane.showMessageDialog(taskAddFrame, "Task description cannot be empty.");
+                }
+                task.setPriority(taskAddFrame.getTaskPriority());
+                task.setDone(taskAddFrame.isTaskDone());
+                if (isValid) {
+                    taskList.addTask(task);
+                    taskListView.getTaskListModel().addElement(task);
+                    taskAddFrame.dispose();
+                }
+            });
+
+            taskAddFrame.getCancelButton().addActionListener(a -> {
+                taskAddFrame.dispose();
+            });
+
+            taskAddFrame.setVisible(true);
         });
+
+
+
 
         taskListView.getTaskEditButtons().b2.addActionListener(e -> {
             int selectedIndex = taskListView.getTaskJList().getSelectedIndex();
@@ -57,18 +82,43 @@ public class TaskListController {
                 Task selectedTask = taskList.getTaskList().get(selectedIndex);
                 TaskFrame taskEditFrame = new TaskFrame(selectedTask, "Edit");
 
-                if (taskEditFrame.isTaskConfirmed()) {
-                    selectedTask.setName(taskEditFrame.getTaskName());
-                    selectedTask.setDescription(taskEditFrame.getTaskDescription());
-                    selectedTask.setPriority(taskEditFrame.getTaskPriority());
-                    selectedTask.setDone(taskEditFrame.isTaskDone());
+                taskEditFrame.getSubmitButton().addActionListener(a -> {
+                    boolean isValid = true;
 
-                    taskListView.getTaskListModel().set(selectedIndex, selectedTask);
-                }
+                    try {
+                        selectedTask.setName(taskEditFrame.getTaskName());
+                    } catch (EmptyValueException e1) {
+                        isValid = false;
+                        JOptionPane.showMessageDialog(taskEditFrame, "Task name cannot be empty.");
+                    }
+
+                    try {
+                        selectedTask.setDescription(taskEditFrame.getTaskDescription());
+                    } catch (EmptyValueException e1) {
+                        isValid = false;
+                        JOptionPane.showMessageDialog(taskEditFrame, "Task description cannot be empty.");
+                    }
+
+                    if (isValid) {
+                        selectedTask.setPriority(taskEditFrame.getTaskPriority());
+                        selectedTask.setDone(taskEditFrame.isTaskDone());
+
+                        taskListView.getTaskListModel().set(selectedIndex, selectedTask);
+                        taskEditFrame.dispose();
+                    }
+                });
+
+                taskEditFrame.getCancelButton().addActionListener(a -> {
+                    taskEditFrame.dispose();
+                });
+
+                taskEditFrame.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No task selected for editing.");
             }
         });
+
+
 
         taskListView.getTaskEditButtons().b3.addActionListener(e -> {
             if(taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).getIsDone())
@@ -83,5 +133,6 @@ public class TaskListController {
         });
 
     }
+
 
 }

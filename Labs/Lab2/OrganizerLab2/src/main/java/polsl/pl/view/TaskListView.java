@@ -13,15 +13,12 @@ public class TaskListView extends BaseView {
     private ButtonPanel taskEditButtons;
 
     public TaskListView() {
-        //Task list here
         taskListModel = new DefaultListModel();
         taskJList = new JList(taskListModel);
         JScrollPane scrollPane = new JScrollPane(taskJList);
 
-        //task list config buttons
         taskEditButtons = new ButtonPanel("Add","Edit","Done","Delete");
 
-        //add to tasklistview items
         this.add(scrollPane, BorderLayout.CENTER);
         this.add(taskEditButtons, BorderLayout.SOUTH);
     }

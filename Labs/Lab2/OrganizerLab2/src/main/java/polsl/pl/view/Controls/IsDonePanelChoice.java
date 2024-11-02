@@ -3,28 +3,25 @@ package polsl.pl.view.Controls;
 import javax.swing.*;
 import java.awt.*;
 
-public class IsDonePanelChoice extends JPanel {
-    private JRadioButton done;
-    private JRadioButton notDone;
-    private ButtonGroup buttonGroup;
-
+public class IsDonePanelChoice extends javax.swing.JPanel {
+    private JRadioButton done, notDone;
+    private JLabel label;
     public IsDonePanelChoice(Boolean isDone) {
-        this.setLayout(new GridLayout(1,2));
+        this.setLayout(new GridLayout(1,3));
+        label = new JLabel("isDone:");
         done = new JRadioButton("Done");
         notDone = new JRadioButton("Not Done");
-        buttonGroup = new ButtonGroup();
-        buttonGroup.add(done);
-        buttonGroup.add(notDone);
+        ButtonGroup group = new ButtonGroup();
+        group.add(done);
+        group.add(notDone);
+        if (isDone)
+            done.setSelected(true);
+        else
+            notDone.setSelected(true);
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        add(label);
         add(done);
         add(notDone);
-
-        if (isDone) {
-            done.setSelected(true);
-        } else {
-            notDone.setSelected(true);
-        }
     }
 
     public boolean isDone() {

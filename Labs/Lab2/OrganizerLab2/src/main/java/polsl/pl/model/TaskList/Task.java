@@ -1,5 +1,7 @@
 package polsl.pl.model.TaskList;
 
+import polsl.pl.model.Exceptions.EmptyValueException;
+
 /**
  * Represent a Task
  */
@@ -97,7 +99,10 @@ public class Task {
      * @param name a String representing Task's name
      */
     public void setName(String name) {
-        this.name = name;
+        if (name.isBlank())
+            throw new EmptyValueException("Name cannot be blank.");
+        else
+            this.name = name;
     }
 
     /** Sets Task's priority
@@ -111,7 +116,10 @@ public class Task {
      * @param description a String representing Task's description
      */
     public void setDescription(String description) {
-        this.description = description;
+        if (description.isBlank())
+            throw new EmptyValueException("Description cannot be blank.");
+        else
+            this.description = description;
     }
 
     /**
