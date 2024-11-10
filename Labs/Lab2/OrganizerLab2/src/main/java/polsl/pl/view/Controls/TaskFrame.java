@@ -6,16 +6,46 @@ import polsl.pl.model.TaskList.Task;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JDialog window that contain all Controls that allow to set/edit data
+ * of a Task added/selected in TaskListView
+ * @author Dawid Polczyk
+ * @version 1.0
+ */
 public class TaskFrame extends JDialog {
+    /**
+     * Used to show id of a Task set automatically
+     */
     private JTextField id;
+    /**
+     * Used to show/edit name of a Task
+     */
     private JTextArea name;
+    /**
+     * Used to show/edit description of a Task
+     */
     private JTextArea description;
+    /**
+     * Used to show/set Priority value of a Task
+     */
     private PriorityPanelChoice priorityPanelChoice;
+    /**
+     * Used to show/set isDone value of a Task
+     */
     private IsDonePanelChoice isDonePanelChoice;
-    private JButton submitButton, cancelButton;
+    /**
+     * Used to submit data of Task in JDialog
+     */
+    private JButton submitButton;
+    /**
+     * Used to cancel data of Task in JDialog
+     */
+    private JButton cancelButton;
 
-    private boolean taskConfirmed = false;
-
+    /** Creates object of TaskFrame
+     * @param task Used to access data of a task created in controller
+     * @param title String representing tittle of the window
+     */
     public TaskFrame(Task task, String title) {
         setModal(true);
         setTitle(title + " Task");
@@ -57,38 +87,47 @@ public class TaskFrame extends JDialog {
 
         setSize(500, 300);
         setLocationRelativeTo(null);
-
     }
 
 
-    public boolean isTaskConfirmed() {
-        return taskConfirmed;
-    }
-
-    public void setTaskConfirmed(boolean taskConfirmed) {
-        this.taskConfirmed = taskConfirmed;
-    }
-
+    /** Gets SubmitButton
+     * @return JButton representing SubmitButton
+     */
     public JButton getSubmitButton() {
         return submitButton;
     }
 
+    /** Gets CancelButton
+     * @return JButton representing CancelButton
+     */
     public JButton getCancelButton() {
         return cancelButton;
     }
 
+    /** Gets the name of a Task
+     * @return String representing Task name
+     */
     public String getTaskName() {
         return name.getText();
     }
 
+    /** Gets the description of a Task
+     * @return String representing Task description
+     */
     public String getTaskDescription() {
         return description.getText();
     }
 
+    /** Gets the priority value of a Task
+     * @return Priority representing the Task Priority
+     */
     public Priority getTaskPriority() {
         return priorityPanelChoice.getPriority();
     }
 
+    /** Gets the isDone value of a Task
+     * @return boolean value of the Task isDone
+     */
     public boolean isTaskDone() {
         return isDonePanelChoice.isDone();
     }
