@@ -4,6 +4,8 @@ import polsl.pl.model.Exceptions.EmptyValueException;
 
 /**
  * Represent a Task
+ * @author Dawid Polczyk
+ * @version 1.0
  */
 public class Task {
     /**

@@ -2,6 +2,11 @@ package polsl.pl.controller;
 
 import polsl.pl.view.AppView;
 
+/**
+ * Controller used for navigation in buttons Action listener in app
+ * @author Dawid Polczyk
+ * @version 1.0
+ */
 public class AppController {
     public AppController(AppView appView){
 

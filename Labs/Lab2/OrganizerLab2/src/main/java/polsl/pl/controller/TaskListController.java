@@ -10,12 +10,26 @@ import polsl.pl.view.TaskListView;
 import javax.swing.*;
 
 
+/**
+ * Controller for Task List in App
+ * @author Dawid Polczyk
+ * @version 1.0
+ */
 public class TaskListController {
 
 
+    /**
+     * TaskListView object used for accesing view
+     */
     private TaskListView taskListView;
+    /**
+     * TaskList model
+     */
     private TaskList taskList;
 
+    /** Used for making TaskListController object
+     * @param taskListView Tasklist view
+     */
     public TaskListController(TaskListView taskListView) {
         this.taskListView = taskListView;
         taskList = new TaskList();
