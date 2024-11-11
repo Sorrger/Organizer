@@ -22,7 +22,7 @@ public class TaskListView extends BaseView {
      */
     private DefaultListModel taskListModel;
     /**
-     * Button pannel that contains all buttons used to edit tasks:
+     * Button panel that contains all buttons used to edit tasks:
      * 1 -> ADD - open new TaskFrame.java that allow us to set data of new added task
      * 1 -> EDIT - open new TaskFrame.java that allow us to edit data of selected Task in taskJList
      * 1 -> DONE - change the value of isDone of the selected Task
