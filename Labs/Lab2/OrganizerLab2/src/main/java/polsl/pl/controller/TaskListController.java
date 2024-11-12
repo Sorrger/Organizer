@@ -135,15 +135,25 @@ public class TaskListController {
 
 
         taskListView.getTaskEditButtons().b3.addActionListener(e -> {
-            if(taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).getIsDone())
-                taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).setDone(false);
-            else
-                taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).setDone(true);
+            if (taskListView.getTaskJList().getSelectedIndex() != -1) {
+                if (taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).getIsDone())
+                    taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).setDone(false);
+                else
+                    taskListModel.getElementAt(taskListView.getTaskJList().getSelectedIndex()).setDone(true);
 
-            taskListView.getTaskJList().repaint();
+                taskListView.getTaskJList().repaint();
+            }else{
+                JOptionPane.showMessageDialog(null, "No task selected for editing.");
+            }
         });
         taskListView.getTaskEditButtons().b4.addActionListener(e -> {
-            taskListModel.remove(taskListView.getTaskJList().getSelectedIndex());
+            if (taskListView.getTaskJList().getSelectedIndex() != -1) {
+                taskListModel.remove(taskListView.getTaskJList().getSelectedIndex());
+
+            }else{
+                JOptionPane.showMessageDialog(null, "No task selected to remove.");
+            }
+
         });
 
     }

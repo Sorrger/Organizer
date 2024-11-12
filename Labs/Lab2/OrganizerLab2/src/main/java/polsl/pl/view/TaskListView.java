@@ -5,6 +5,7 @@ import polsl.pl.view.Controls.ButtonPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * View that represents Task List in the app
@@ -38,7 +39,23 @@ public class TaskListView extends BaseView {
         taskJList = new JList(taskListModel);
         JScrollPane scrollPane = new JScrollPane(taskJList);
 
-        taskEditButtons = new ButtonPanel("Add","Edit","Done","Delete");
+        taskEditButtons = new ButtonPanel("Add[Alt + A]","Edit[Alt + F]","Done[Alt + D]","Delete[Alt + X]");
+
+        taskEditButtons.b1.setToolTipText("Add a new task");
+        taskEditButtons.b1.getAccessibleContext().setAccessibleDescription("Button to add a new task");
+        taskEditButtons.b1.setMnemonic(KeyEvent.VK_A);
+
+        taskEditButtons.b2.setToolTipText("Edit the selected task");
+        taskEditButtons.b2.getAccessibleContext().setAccessibleDescription("Button to edit the selected task");
+        taskEditButtons.b2.setMnemonic(KeyEvent.VK_F);
+
+        taskEditButtons.b3.setToolTipText("Mark the selected task as done");
+        taskEditButtons.b3.getAccessibleContext().setAccessibleDescription("Button to mark the selected task as done");
+        taskEditButtons.b3.setMnemonic(KeyEvent.VK_D);
+
+        taskEditButtons.b4.setToolTipText("Delete the selected task");
+        taskEditButtons.b4.getAccessibleContext().setAccessibleDescription("Button to delete the selected task");
+        taskEditButtons.b4.setMnemonic(KeyEvent.VK_X);
 
         this.add(scrollPane, BorderLayout.CENTER);
         this.add(taskEditButtons, BorderLayout.SOUTH);

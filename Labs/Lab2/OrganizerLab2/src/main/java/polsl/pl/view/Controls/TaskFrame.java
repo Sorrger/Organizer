@@ -5,6 +5,7 @@ import polsl.pl.model.TaskList.Task;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * JDialog window that contain all Controls that allow to set/edit data
@@ -56,11 +57,31 @@ public class TaskFrame extends JDialog {
         description = new JTextArea(task.getDescription());
         priorityPanelChoice = new PriorityPanelChoice(task.getPriority());
         isDonePanelChoice = new IsDonePanelChoice(task.getIsDone());
-        submitButton = new JButton(title);
-        cancelButton = new JButton("Cancel");
+        submitButton = new JButton(title + "[Alt + E]");
+        cancelButton = new JButton("Cancel [Alt + Q]");
 
         id.setEditable(false);
         id.setFocusable(false);
+
+        id.setToolTipText("Unique ID of the task (not editable)");
+        name.setToolTipText("Enter or edit the task name");
+        description.setToolTipText("Enter or edit the task description");
+        priorityPanelChoice.setToolTipText("Select the task priority level");
+        isDonePanelChoice.setToolTipText("Mark if the task is completed");
+        submitButton.setToolTipText("Submit the changes");
+        cancelButton.setToolTipText("Cancel the operation");
+
+        id.getAccessibleContext().setAccessibleDescription("Read-only text field displaying the task ID");
+        name.getAccessibleContext().setAccessibleDescription("Text area to enter or edit the task name");
+        description.getAccessibleContext().setAccessibleDescription("Text area to enter or edit the task description");
+        priorityPanelChoice.getAccessibleContext().setAccessibleDescription("Dropdown to select the task priority level");
+        isDonePanelChoice.getAccessibleContext().setAccessibleDescription("Checkbox to indicate if the task is done");
+        submitButton.getAccessibleContext().setAccessibleDescription("Button to submit changes to the task");
+        cancelButton.getAccessibleContext().setAccessibleDescription("Button to cancel the operation");
+
+
+        submitButton.setMnemonic(KeyEvent.VK_E);
+        cancelButton.setMnemonic(KeyEvent.VK_Q);
 
         JPanel idPanel = new JPanel(new GridLayout());
         idPanel.add(new JLabel("ID:"));
