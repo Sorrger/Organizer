@@ -19,9 +19,19 @@ import java.awt.*;
  */
 public class TaskListController {
 
+    /**
+     * TaskList view used by controller to provide user control
+     * and backend
+     */
     private TaskListView taskListView;
+    /**
+     * TaskList model used to access models data
+     */
     private TaskList taskList;
 
+    /** Used to create TaskListController object
+     * @param taskListView view representing Task List Model
+     */
     public TaskListController(TaskListView taskListView) {
         this.taskListView = taskListView;
         taskList = new TaskList();
@@ -52,6 +62,9 @@ public class TaskListController {
                 }));
     }
 
+    /**
+     * Action on button to add Task to TaskList
+     */
     private void addTask() {
         Task task = new Task();
         TaskFrame taskFrame = new TaskFrame(task, "Add");
@@ -75,6 +88,9 @@ public class TaskListController {
         taskFrame.setVisible(true);
     }
 
+    /**
+     * Action on button to edit Task in TaskList
+     */
     private void editTask() {
         int selectedRow = taskListView.getTaskTable().getSelectedRow();
         if (selectedRow != -1) {
@@ -101,7 +117,9 @@ public class TaskListController {
             JOptionPane.showMessageDialog(null, "No task selected for editing!");
         }
     }
-
+    /**
+     * Action on button to display Task from TaskList by Task ID
+     */
     private void displayTaskByID() {
         int id  = Integer.parseInt(getUserInput());
         Task task;
@@ -113,7 +131,9 @@ public class TaskListController {
             JOptionPane.showMessageDialog(null, "No task with this id in the task list!");
         }
     }
-
+    /**
+     * Action on button to delete Task from TaskList
+     */
     private void deleteTask() {
         int selectedRow = taskListView.getTaskTable().getSelectedRow();
         if (selectedRow != -1) {
@@ -123,6 +143,9 @@ public class TaskListController {
             JOptionPane.showMessageDialog(null, "No task selected to delete!");
         }
     }
+    /**
+     * Method used to create JOption pane to get Task ID from user keyboard
+     */
     private String getUserInput() {
         JTextField field = new JTextField();
         String param = "";

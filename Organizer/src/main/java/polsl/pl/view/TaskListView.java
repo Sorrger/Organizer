@@ -34,12 +34,11 @@ public class TaskListView extends BaseView {
      * Creates object of TaskListView
      */
     public TaskListView() {
-        // Table model with column names
         String[] columnNames = {"ID", "Name", "Description", "Priority", "Done"};
         taskTableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Make table cells non-editable
+                return false;
             }
         };
 
