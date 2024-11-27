@@ -124,7 +124,7 @@ public class TaskListController {
         int id  = Integer.parseInt(getUserInput());
         Task task;
         try {
-            task = taskList.getTask(id);
+            task = taskList.getTaskList().get(id);
             TaskRecord record = new TaskRecord(task.getName(), task.getDescription());
             JOptionPane.showMessageDialog(null, record);
         } catch (NullPointerException ex) {

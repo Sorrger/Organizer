@@ -32,14 +32,11 @@ public class TaskList {
      * @param val int representing id of Task
      * @return Task with id equal to the val
      */
-    public Task getTask(int val){
-
-        for (Task task : taskList) {
-            if (task.getId() == val) {  // Assuming Task class has getId() method
-                return task;
-            }
+    public Task getTask(int val) {
+        if (val < 0 || val >= taskList.size()) {
+            return null; // Return null for out-of-bounds indices
         }
-        return null;
+        return taskList.get(val);
     }
 
     /**Sets the Task in TaskList with number in TaskList equal to the val isDone value
