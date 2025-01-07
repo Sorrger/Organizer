@@ -83,6 +83,9 @@
             </form>
         </td>
         <td>
+            <a href="editTask?id=<%= task.getId() %>">Edit</a>
+        </td>
+        <td>
             <form action="deleteTask" method="POST">
                 <input type="hidden" name="id" value="<%= task.getId() %>">
                 <button type="submit">Delete</button>
